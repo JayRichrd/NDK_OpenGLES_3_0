@@ -279,6 +279,7 @@ public class MainActivity extends AppCompatActivity implements AudioCollector.Ca
         myPreviewSizeViewAdapter.addOnItemClickListener(new MyRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+                Log.i(TAG, "onItemClick: position = " + position);
                 mRootView.removeView(mGLSurfaceView);
                 RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);

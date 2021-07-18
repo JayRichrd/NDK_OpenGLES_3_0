@@ -10,6 +10,7 @@
 
 FBOSample::FBOSample()
 {
+	LOGCATI("FBOSample::Constructor: ");
 	m_VaoIds[0] = GL_NONE;
 	m_VboIds[0] = GL_NONE;
 
@@ -30,7 +31,7 @@ FBOSample::~FBOSample()
 
 void FBOSample::LoadImage(NativeImage *pImage)
 {
-	LOGCATE("FBOSample::LoadImage pImage = %p", pImage->ppPlane[0]);
+	LOGCATI("FBOSample::LoadImage: pImage = %p", pImage->ppPlane[0]);
 	if (pImage)
 	{
 		m_RenderImage.width = pImage->width;
@@ -42,6 +43,7 @@ void FBOSample::LoadImage(NativeImage *pImage)
 
 void FBOSample::Init()
 {
+	LOGCATI("FBOSample::Init: ");
 	//顶点坐标
 	GLfloat vVertices[] = {
 			-1.0f, -1.0f, 0.0f,
@@ -197,6 +199,7 @@ void FBOSample::Init()
 
 void FBOSample::Draw(int screenW, int screenH)
 {
+	LOGCATI("FBOSample::Draw: screenW = %d, screenH = %d", screenW, screenH);
 	// 离屏渲染
 	glPixelStorei(GL_UNPACK_ALIGNMENT,1);
 	glViewport(0, 0, m_RenderImage.width, m_RenderImage.height);
@@ -286,6 +289,7 @@ void FBOSample::Destroy()
 
 bool FBOSample::CreateFrameBufferObj()
 {
+	LOGCATI("FBOSample::CreateFrameBufferObj: ");
 	// 创建并初始化 FBO 纹理
 	glGenTextures(1, &m_FboTextureId);
 	glBindTexture(GL_TEXTURE_2D, m_FboTextureId);

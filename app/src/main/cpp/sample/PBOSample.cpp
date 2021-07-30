@@ -42,7 +42,7 @@ PBOSample::~PBOSample()
 
 void PBOSample::LoadImage(NativeImage *pImage)
 {
-	LOGCATE("PBOSample::LoadImage pImage = %p", pImage->ppPlane[0]);
+	LOGCATE("PBOSample::LoadImage: pImage = %p", pImage->ppPlane[0]);
 	if (pImage)
 	{
 		m_RenderImage.width = pImage->width;
@@ -54,6 +54,7 @@ void PBOSample::LoadImage(NativeImage *pImage)
 
 void PBOSample::Init()
 {
+    LOGCATE("PBOSample::Init: ");
     if(m_ProgramObj)
         return;
 
@@ -243,7 +244,8 @@ void PBOSample::Init()
 
 void PBOSample::Draw(int screenW, int screenH)
 {
-	// 离屏渲染
+    LOGCATE("PBOSample::Draw: screenW = %d, screenH = %d", screenW, screenH);
+    // 离屏渲染
 	//glPixelStorei(GL_UNPACK_ALIGNMENT,1);
 	glViewport(0, 0, m_RenderImage.width, m_RenderImage.height);
 
@@ -341,7 +343,8 @@ void PBOSample::Destroy()
 
 bool PBOSample::CreateFrameBufferObj()
 {
-	// 创建并初始化 FBO 纹理
+    LOGCATE("PBOSample::CreateFrameBufferObj: ");
+    // 创建并初始化 FBO 纹理
 	glGenTextures(1, &m_FboTextureId);
 	glBindTexture(GL_TEXTURE_2D, m_FboTextureId);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -368,7 +371,7 @@ bool PBOSample::CreateFrameBufferObj()
 
 void PBOSample::UpdateMVPMatrix(glm::mat4 &mvpMatrix, int angleX, int angleY, float ratio)
 {
-    LOGCATE("PBOSample::UpdateMVPMatrix angleX = %d, angleY = %d, ratio = %f", angleX, angleY, ratio);
+    LOGCATE("PBOSample::UpdateMVPMatrix: angleX = %d, angleY = %d, ratio = %f", angleX, angleY, ratio);
     angleX = angleX % 360;
     angleY = angleY % 360;
 
@@ -397,7 +400,7 @@ void PBOSample::UpdateMVPMatrix(glm::mat4 &mvpMatrix, int angleX, int angleY, fl
 }
 
 void PBOSample::UploadPixels() {
-    LOGCATE("PBOSample::UploadPixels");
+    LOGCATE("PBOSample::UploadPixels:");
 	int dataSize = m_RenderImage.width * m_RenderImage.height * 4;
 
 #ifdef PBO_UPLOAD
@@ -453,6 +456,7 @@ void PBOSample::UploadPixels() {
 }
 
 void PBOSample::DownloadPixels() {
+    LOGCATE("PBOSample::DownloadPixels: ");
     int dataSize = m_RenderImage.width * m_RenderImage.height * 4;
 	NativeImage nativeImage = m_RenderImage;
 	nativeImage.format = IMAGE_FORMAT_RGBA;
